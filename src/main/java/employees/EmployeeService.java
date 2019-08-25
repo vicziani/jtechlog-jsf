@@ -19,7 +19,7 @@ public class EmployeeService {
 
     public List<EmployeeDto> listEmployees() {
         return employeeRepository
-                .listEmployeesWithAddresses()
+                .findAll()
                 .stream()
                 .map(EmployeeDto::new)
                 .collect(Collectors.toList());
@@ -50,13 +50,6 @@ public class EmployeeService {
 
     public List<Integer> listSalaryOptions() {
         return List.of(100_000, 200_000, 500_000);
-    }
-
-    public List<CodeElement> listCodeElements() {
-        return List.of(new CodeElement(100_000, "hundred thousand"),
-                new CodeElement(200_000, "twohundred thousand"),
-                new CodeElement(250_000, "twohundred and fifty thousand"),
-                new CodeElement(250_030, "two hundred and fifty thousand and thirty"));
     }
 
     public int findEmployeeCountWithName(String name) {

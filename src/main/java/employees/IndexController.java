@@ -1,14 +1,11 @@
 package employees;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequestScope
@@ -18,18 +15,6 @@ public class IndexController {
 
     public IndexController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-    }
-
-    public String getMessage() {
-        return "Hello JSF " + LocalDateTime.now();
-    }
-
-    public String getNames() {
-        return employeeService
-                .listEmployees()
-                .stream()
-                .map(EmployeeDto::getName)
-                .collect(Collectors.joining(", "));
     }
 
     public List<EmployeeDto> getEmployees() {
@@ -46,7 +31,6 @@ public class IndexController {
                         + employee.getName())
         );
 
-        //return "index.xhtml?faces-redirect=true";
-        return null;
+        return "index.xhtml?faces-redirect=true";
     }
 }

@@ -14,7 +14,7 @@ public class CreateEmployeeController {
 
     private EmployeeService employeeService;
 
-    private List<CodeElement> salaryOptions;
+    private List<Integer> salaryOptions;
 
     private CreateEmployeeCommand command =
             new CreateEmployeeCommand("", 100_000);
@@ -25,8 +25,7 @@ public class CreateEmployeeController {
 
     @PostConstruct
     public void initSalaryOptions() {
-        //salaryOptions = employeeService.listSalaryOptions();
-        salaryOptions = employeeService.listCodeElements();
+        salaryOptions = employeeService.listSalaryOptions();
     }
 
     public String createEmployee() {
@@ -62,12 +61,9 @@ public class CreateEmployeeController {
         this.command = command;
     }
 
-//    public List<Integer> getSalaryOptions() {
-//        return salaryOptions;
-//    }
-
-
-    public List<CodeElement> getSalaryOptions() {
+    public List<Integer> getSalaryOptions() {
         return salaryOptions;
     }
+
+
 }

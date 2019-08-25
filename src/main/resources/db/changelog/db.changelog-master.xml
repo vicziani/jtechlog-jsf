@@ -10,11 +10,4 @@
                  relativeToChangelogFile="true" />
     </changeSet>
 
-    <changeSet id="employee-check" author="vicziani" runOnChange="true">
-        <sqlFile path="employee-check.sql"
-                 relativeToChangelogFile="true"
-                endDelimiter="#"
-        />
-    </changeSet>
-
 </databaseChangeLog>

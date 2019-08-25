@@ -9,7 +9,6 @@
 <h:head>
     <title>Employees</title>
     <h:outputStylesheet library="webjars" name="/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="employees.css"/>
 </h:head>
 <body>
     <main class="container">
@@ -26,10 +25,6 @@
     </h:form>
 
     <h:messages styleClass="alert alert-success" />
-
-    <p>#{indexController.message}</p>
-
-    <p>#{indexController.names}</p>
 
         <h:form id="employeeTable">
     <h:dataTable value="#{indexController.employees}" var="employee"
@@ -57,22 +52,6 @@
                 Salary
             </f:facet>
             #{employee.salary}
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                Saved at
-            </f:facet>
-            <h:outputText value="#{employee.savedAt}">
-                <f:convertDateTime type="localDate" pattern="yyyy MMMM dd. hh:mm"
-                    />
-            </h:outputText>
-
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                Cities
-            </f:facet>
-            #{employee.cities}
         </h:column>
         <h:column>
             <h:commandButton value="Delete"

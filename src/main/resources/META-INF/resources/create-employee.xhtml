@@ -9,7 +9,6 @@
 <h:head>
     <title>Title</title>
     <h:outputStylesheet library="webjars" name="/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="employees.css"/>
 </h:head>
 <h:body>
 
@@ -17,8 +16,6 @@
 <h1>Welcome</h1>
 
     <h:messages styleClass="alert alert-danger" globalOnly="true" />
-
-    #{facesContext.messageList}
 
 <h:form>
 
@@ -38,7 +35,7 @@
         <h:selectOneMenu id="salary" value="#{createEmployeeController.command.salary}"
             styleClass="form-control #{component.valid ? '' : 'is-invalid'}">
             <f:selectItems value="#{createEmployeeController.salaryOptions}" var="n"
-                           itemLabel="#{n.name}" itemValue="#{n.code}"/>
+                           itemLabel="#{n}" itemValue="#{n}"/>
         </h:selectOneMenu>
         <h:message for="salary" styleClass="invalid-feedback" />
     </div>

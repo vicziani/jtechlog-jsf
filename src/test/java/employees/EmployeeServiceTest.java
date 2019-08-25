@@ -28,16 +28,13 @@ public class EmployeeServiceTest {
 
     @Test
     public void testListEmployees() {
-        when(employeeRepository.listEmployeesWithAddresses())
-                .thenReturn(List.of(new Employee(1L, "John Doe", 100_000,
-                        List.of(new Address(1L, "1111", "Budapest", "Fo ut 30"),
-                                new Address(2L, "2222", "Debrecen", "Nagyerdo 3.")))));
+        when(employeeRepository.findAll())
+                .thenReturn(List.of(new Employee(1L, "John Doe", 100_000)));
 
         List<EmployeeDto> employees = employeeService.listEmployees();
 
         assertEquals(1, employees.size());
         assertEquals("John Doe", employees.get(0).getName());
-        assertEquals("Budapest, Debrecen", employees.get(0).getCities());
     }
 
     @Test
