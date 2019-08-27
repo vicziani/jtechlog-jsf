@@ -1,11 +1,10 @@
 package employees;
 
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +18,7 @@ public class EmployeeService {
 
     public List<EmployeeDto> listEmployees() {
         return employeeRepository
-                .findAll()
+                .findAll(Sort.by("name"))
                 .stream()
                 .map(EmployeeDto::new)
                 .collect(Collectors.toList());

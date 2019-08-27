@@ -13,8 +13,8 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Sql(statements = {"delete from address", "delete from employee"})
-public class EmployeeServiceIntegrationTest {
+@Sql(statements = {"delete from employee"})
+public class EmployeeServiceIT {
 
     @Autowired
     private EmployeeService employeeService;

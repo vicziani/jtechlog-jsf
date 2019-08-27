@@ -28,7 +28,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void testListEmployees() {
-        when(employeeRepository.findAll())
+        when(employeeRepository.findAll((Sort) anyObject()))
                 .thenReturn(List.of(new Employee(1L, "John Doe", 100_000)));
 
         List<EmployeeDto> employees = employeeService.listEmployees();
