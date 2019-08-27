@@ -7,17 +7,17 @@
       >
 
 <h:head>
-    <title>Title</title>
+    <title>Employees</title>
     <h:outputStylesheet library="webjars" name="/bootstrap/4.3.1/css/bootstrap.min.css"/>
 </h:head>
 <h:body>
 
 <main class="container">
-<h1>Welcome</h1>
+    <h1>Create employee</h1>
 
     <h:messages styleClass="alert alert-danger" globalOnly="true" />
 
-<h:form>
+    <h:form>
 
     <div class="form-group">
         <label for="name">Name</label>
@@ -42,6 +42,9 @@
 
     <h:commandButton value="Create employee"
         action="#{createEmployeeController.createEmployee()}" styleClass="btn btn-primary"/>
+        <h:outputText value=" " />
+
+        <h:link value="Cancel" outcome="index.xhtml" />
 
 </h:form>
 

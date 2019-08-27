@@ -51,8 +51,8 @@ public class EmployeeService {
         return List.of(100_000, 200_000, 500_000);
     }
 
-    public int findEmployeeCountWithName(String name) {
+    public int countEmployeesWithName(String name) {
         return
-                employeeRepository.findEmployeeCountWithName(name);
+                employeeRepository.countEmployeesWithName(name);
     }
 }

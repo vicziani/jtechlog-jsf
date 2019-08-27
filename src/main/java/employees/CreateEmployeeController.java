@@ -14,13 +14,16 @@ public class CreateEmployeeController {
 
     private EmployeeService employeeService;
 
+    private MessageContext messageContext;
+
     private List<Integer> salaryOptions;
 
     private CreateEmployeeCommand command =
             new CreateEmployeeCommand("", 100_000);
 
-    public CreateEmployeeController(EmployeeService employeeService) {
+    public CreateEmployeeController(EmployeeService employeeService, MessageContext messageContext) {
         this.employeeService = employeeService;
+        this.messageContext = messageContext;
     }
 
     @PostConstruct
@@ -29,26 +32,31 @@ public class CreateEmployeeController {
     }
 
     public String createEmployee() {
-
-        var count = employeeService.findEmployeeCountWithName(command.getName());
+        var count = employeeService.countEmployeesWithName(command.getName());
         if (count > 0) {
-            FacesContext.getCurrentInstance()
-                    .addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Name already exists!", ""));
+//            FacesContext.getCurrentInstance()
+//                    .addMessage(null,
+//                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Name already exists!", ""));
+
+
+            messageContext.addMessage("name_already_exists");
             return null;
         }
 
         employeeService.createEmployee(command);
 
-        FacesContext.getCurrentInstance()
-                .getExternalContext()
-                .getFlash()
-                .setKeepMessages(true);
+        // FacesContext.getCurrentInstance() is null in
 
-        FacesContext.getCurrentInstance()
-                .addMessage(null,
-                        new FacesMessage("Employess has created with name "
-                                + command.getName()));
+//        FacesContext.getCurrentInstance()
+//                .getExternalContext()
+//                .getFlash()
+//                .setKeepMessages(true);
+//
+//        FacesContext.getCurrentInstance()
+//                .addMessage(null,
+//                        new FacesMessage("Employee has created with name "
+//                                + command.getName()));
+        messageContext.addFlashMessage("employee_has_created", command.getName());
 
         return "index.xhtml?faces-redirect=true";
     }

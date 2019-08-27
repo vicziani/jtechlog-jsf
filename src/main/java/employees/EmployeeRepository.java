@@ -8,5 +8,5 @@ public interface EmployeeRepository
     extends JpaRepository<Employee, Long> {
 
     @Query(value = "select count(employee.id) from Employee employee where employee.name = :name")
-    int findEmployeeCountWithName(@Param("name") String name);
+    int countEmployeesWithName(@Param("name") String name);
 }

@@ -28,7 +28,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void testListEmployees() {
-        when(employeeRepository.findAll((Sort) anyObject()))
+        when(employeeRepository.findAll(any(Sort.class)))
                 .thenReturn(List.of(new Employee(1L, "John Doe", 100_000)));
 
         List<EmployeeDto> employees = employeeService.listEmployees();
@@ -41,9 +41,6 @@ public class EmployeeServiceTest {
     public void testCreateEmployee() {
         employeeService.createEmployee(new CreateEmployeeCommand("John Doe", 100_000));
 
-        ArgumentCaptor<Employee> argument = ArgumentCaptor.forClass(Employee.class);
-        verify(employeeRepository).save(argument.capture());
-        assertEquals("John Doe", argument.getValue().getName());
-        assertEquals(100_000, argument.getValue().getSalary());
+        verify(employeeRepository).save(argThat(e -> e.getName().equals("John Doe")));
     }
 }
