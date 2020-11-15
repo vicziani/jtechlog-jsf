@@ -26,7 +26,7 @@ public class CreateEmployeeControllerTest {
         createEmployeeController.setCommand(new CreateEmployeeCommand("John Doe", 100_000));
         createEmployeeController.createEmployee();
 
-        verify(messageContext).addFlashMessage(eq("employee_has_created"), eq("John Doe"));
+        verify(messageContext).addFlashMessage(eq("employee_has_been_created"), eq("John Doe"));
         verify(employeeService).createEmployee(argThat(command -> command.getName().equals("John Doe")));
     }
 

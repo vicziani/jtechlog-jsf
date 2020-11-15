@@ -1,23 +1,21 @@
 package employees;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
-import javax.faces.context.FacesContext;
-
 @Component
 @RequestScope
+@RequiredArgsConstructor
 public class EmployeeDetailsController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+
+    private final MessageContext messageContext;
 
     private long id;
 
     private ModifyEmployeeCommand command = new ModifyEmployeeCommand();
-
-    public EmployeeDetailsController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     public void findEmployeeById() {
             var employee = employeeService.findEmployeeById(id);
@@ -41,10 +39,7 @@ public class EmployeeDetailsController {
 
     public String modifyEmployee() {
         employeeService.modifyEmployee(command);
-        FacesContext.getCurrentInstance()
-                .getExternalContext()
-                .getFlash()
-                .put("successMessage", "Employess has modified with name " + command.getName());
+        messageContext.addFlashMessage("employee_has_been_modified", command.getName());
 
         return "index.xhtml?faces-redirect=true";
     }

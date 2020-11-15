@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       >
-
+<f:view locale="#{localeController.locale}">
 <h:head>
     <title>Employees</title>
     <h:outputStylesheet library="webjars" name="/bootstrap/4.3.1/css/bootstrap.min.css"/>
@@ -51,4 +51,5 @@
 </main>
 
 </h:body>
+</f:view>
 </html>
