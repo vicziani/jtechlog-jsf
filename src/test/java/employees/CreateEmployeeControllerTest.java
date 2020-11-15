@@ -1,28 +1,28 @@
 package employees;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CreateEmployeeControllerTest {
 
     @Mock
-    private MessageContext messageContext;
+    MessageContext messageContext;
 
     @Mock
-    private EmployeeService employeeService;
+    EmployeeService employeeService;
 
     @InjectMocks
-    private CreateEmployeeController createEmployeeController;
+    CreateEmployeeController createEmployeeController;
 
     @Test
-    public void testCreateEmployee() {
+    void testCreateEmployee() {
         createEmployeeController.setCommand(new CreateEmployeeCommand("John Doe", 100_000));
         createEmployeeController.createEmployee();
 
@@ -31,7 +31,7 @@ public class CreateEmployeeControllerTest {
     }
 
     @Test
-    public void testCreateEmployeeWhenEmployeeExists() {
+    void testCreateEmployeeWhenEmployeeExists() {
         when(employeeService.countEmployeesWithName(anyString())).thenReturn(1);
         createEmployeeController.setCommand(new CreateEmployeeCommand("John Doe", 100_000));
         createEmployeeController.createEmployee();

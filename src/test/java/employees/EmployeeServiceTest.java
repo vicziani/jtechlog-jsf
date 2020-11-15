@@ -1,33 +1,29 @@
 package employees;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTest {
 
     @Mock
-    private EmployeeRepository employeeRepository;
+    EmployeeRepository employeeRepository;
 
     @InjectMocks
-    private EmployeeService employeeService;
+    EmployeeService employeeService;
 
     @Test
-    public void testListEmployees() {
+    void testListEmployees() {
         when(employeeRepository.findAll(any(Sort.class)))
                 .thenReturn(List.of(new Employee(1L, "John Doe", 100_000)));
 
@@ -38,7 +34,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testCreateEmployee() {
+    void testCreateEmployee() {
         employeeService.createEmployee(new CreateEmployeeCommand("John Doe", 100_000));
 
         verify(employeeRepository).save(argThat(e -> e.getName().equals("John Doe")));
