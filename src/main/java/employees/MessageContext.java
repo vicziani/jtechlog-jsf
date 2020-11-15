@@ -14,7 +14,7 @@ public class MessageContext {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ResourceBundle bundle = facesContext.getApplication().evaluateExpressionGet(facesContext, "#{msgs}", ResourceBundle.class);
         String pattern = bundle.getString(key);
-        String message = MessageFormat.format(pattern, arguments);
+        String message = MessageFormat.format(pattern, (Object[]) arguments);
 
         facesContext
                 .addMessage(null,
