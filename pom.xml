@@ -15,7 +15,7 @@
 	<description>JTechLog demo project for Spring Boot and JSF</description>
 
 	<properties>
-		<java.version>15</java.version>
+		<java.version>8</java.version>
 	</properties>
 
 	<dependencyManagement>

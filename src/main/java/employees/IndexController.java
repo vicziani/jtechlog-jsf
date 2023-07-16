@@ -20,7 +20,7 @@ public class IndexController {
     }
 
     public String deleteEmployee(EmployeeDto employee) {
-        var command = new DeleteEmployeeCommand();
+        DeleteEmployeeCommand command = new DeleteEmployeeCommand();
         command.setId(employee.getId());
         employeeService.deleteEmployee(command);
         messageContext.addFlashMessage("employee_has_been_deleted", employee.getName());

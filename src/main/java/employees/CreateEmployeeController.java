@@ -27,7 +27,7 @@ public class CreateEmployeeController {
     }
 
     public String createEmployee() {
-        var count = employeeService.countEmployeesWithName(command.getName());
+        int count = employeeService.countEmployeesWithName(command.getName());
         if (count > 0) {
             messageContext.addMessage("name_already_exists");
             return null;

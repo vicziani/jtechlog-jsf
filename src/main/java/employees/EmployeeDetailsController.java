@@ -18,7 +18,7 @@ public class EmployeeDetailsController {
     private ModifyEmployeeCommand command = new ModifyEmployeeCommand();
 
     public void findEmployeeById() {
-            var employee = employeeService.findEmployeeById(id);
+            EmployeeDto employee = employeeService.findEmployeeById(id);
             command = new ModifyEmployeeCommand();
             command.setId(employee.getId());
             command.setName(employee.getName());
