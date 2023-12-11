@@ -17,7 +17,7 @@
 
     <h1>#{msgs.list_employees_header}</h1>
 
-    <p>#{view.locale}</p>
+        <p>#{facesContext.viewRoot.locale}</p>
 
     <h:form>
         <h:commandLink action="#{localeController.changeLocale('hu')}"
@@ -35,6 +35,8 @@
         <p:clock />
 
         <h:form id="employeeTable">
+
+            <!-- IDEA nem ismeri az employee változót a rowClass attribútumban. -->
     <h:dataTable value="#{indexController.employees}" var="employee"
         styleClass="table table-striped"
         rowClass="#{employee.salary > 200000 ? 'table-danger' : ''}"
@@ -64,6 +66,7 @@
         <h:column>
             <h:commandButton value="Delete"
                              action="#{indexController.deleteEmployee(employee)}"
+                             styleClass="btn btn-danger"
                 >
                 <f:ajax execute="@form" render="@all" />
             </h:commandButton>
