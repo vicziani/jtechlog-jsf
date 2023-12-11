@@ -1,10 +1,12 @@
 package employees;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 
 @Component
@@ -16,8 +18,11 @@ public class CreateEmployeeController {
 
     private final MessageContext messageContext;
 
+    @Getter
     private List<Integer> salaryOptions;
 
+    @Getter
+    @Setter
     private CreateEmployeeCommand command =
             new CreateEmployeeCommand("", 100_000);
 
@@ -36,18 +41,5 @@ public class CreateEmployeeController {
         messageContext.addFlashMessage("employee_has_been_created", command.getName());
         return "index.xhtml?faces-redirect=true";
     }
-
-    public CreateEmployeeCommand getCommand() {
-        return command;
-    }
-
-    public void setCommand(CreateEmployeeCommand command) {
-        this.command = command;
-    }
-
-    public List<Integer> getSalaryOptions() {
-        return salaryOptions;
-    }
-
 
 }

@@ -5,6 +5,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       >
 <f:view locale="#{localeController.locale}">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{employeeDetailsController.id}" />
+        <f:viewAction action="#{employeeDetailsController.findEmployeeById}" />
+    </f:metadata>
+
 <h:head>
     <title>Employees</title>
     <h:outputStylesheet library="webjars" name="/bootstrap/4.5.3/css/bootstrap.min.css"/>
@@ -13,17 +19,14 @@
 <main class="container">
     <h1>Employee details</h1>
 
-    <f:metadata>
-        <f:viewParam name="id" value="#{employeeDetailsController.id}" />
-        <f:viewAction action="#{employeeDetailsController.findEmployeeById}" />
-    </f:metadata>
-
     <h:form>
         <h:inputHidden value="#{employeeDetailsController.command.id}" />
 
         <div class="form-group">
             <label for="salary">Name</label>
-            <h:inputText value="#{employeeDetailsController.command.name}" id="name" styleClass="form-control"/>
+            <h:inputText value="#{employeeDetailsController.command.name}" id="name"
+                         styleClass="form-control #{component.valid ? '' : 'is-invalid'}" />
+            <h:message for="name" styleClass="invalid-feedback" />
         </div>
         <div class="form-group">
             <label for="salary">Salary</label>

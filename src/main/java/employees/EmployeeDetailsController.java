@@ -1,6 +1,8 @@
 package employees;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -13,8 +15,12 @@ public class EmployeeDetailsController {
 
     private final MessageContext messageContext;
 
+    @Getter
+    @Setter
     private long id;
 
+    @Getter
+    @Setter
     private ModifyEmployeeCommand command = new ModifyEmployeeCommand();
 
     public void findEmployeeById() {
@@ -25,26 +31,10 @@ public class EmployeeDetailsController {
             command.setSalary(employee.getSalary());
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public ModifyEmployeeCommand getCommand() {
-        return command;
-    }
-
     public String modifyEmployee() {
         employeeService.modifyEmployee(command);
         messageContext.addFlashMessage("employee_has_been_modified", command.getName());
 
         return "index.xhtml?faces-redirect=true";
-    }
-
-    public void setCommand(ModifyEmployeeCommand command) {
-        this.command = command;
     }
 }

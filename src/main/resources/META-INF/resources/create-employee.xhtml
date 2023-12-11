@@ -21,9 +21,9 @@
 
     <div class="form-group">
         <label for="name">Name</label>
+        <!-- A component.valid kifejezést az IDEA nem ismeri -->
         <h:inputText id="name" value="#{createEmployeeController.command.name}"
-            a:autofocus="true" styleClass="form-control #{component.valid ? '' : 'is-invalid'}"
-            binding="#{nameInputText}">
+            a:autofocus="true" styleClass="form-control #{component.valid ? '' : 'is-invalid'}">
         </h:inputText>
         <h:message for="name" styleClass="invalid-feedback" />
     </div>
@@ -33,11 +33,10 @@
     <div class="form-group">
         <label for="salary">Salary</label>
         <h:selectOneMenu id="salary" value="#{createEmployeeController.command.salary}"
-            styleClass="form-control #{component.valid ? '' : 'is-invalid'}">
+            styleClass="form-control">
             <f:selectItems value="#{createEmployeeController.salaryOptions}" var="n"
                            itemLabel="#{n}" itemValue="#{n}"/>
         </h:selectOneMenu>
-        <h:message for="salary" styleClass="invalid-feedback" />
     </div>
 
     <h:commandButton value="Create employee"
