@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,12 +32,12 @@ public class EmployeeService {
     }
 
     public EmployeeDto findEmployeeById(long id) {
-        return new EmployeeDto(employeeRepository.getOne(id));
+        return new EmployeeDto(employeeRepository.findById(id).orElseThrow(illegalArgumentException(id)));
     }
 
     @Transactional
     public void modifyEmployee(ModifyEmployeeCommand command) {
-        Employee employee = employeeRepository.getOne(command.getId());
+        Employee employee = employeeRepository.findById(command.getId()).orElseThrow(illegalArgumentException(command.getId()));
         employee.setName(command.getName());
         employee.setSalary(command.getSalary());
     }
@@ -52,5 +53,9 @@ public class EmployeeService {
     public int countEmployeesWithName(String name) {
         return
                 employeeRepository.countEmployeesWithName(name);
+    }
+
+    private static Supplier<IllegalArgumentException> illegalArgumentException(long id) {
+        return () -> new IllegalArgumentException("Employee not found with id: %d".formatted(id));
     }
 }
