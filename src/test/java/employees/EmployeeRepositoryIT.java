@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Sql(statements = {"delete from employee"})
-public class EmployeeRepositoryIT {
+class EmployeeRepositoryIT {
 
     @Autowired
     EmployeeRepository employeeRepository;
