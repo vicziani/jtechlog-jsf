@@ -24,6 +24,9 @@ public class EmployeeService {
     }
 
     public void createEmployee(CreateEmployeeCommand command) {
+        if (isEmployeeWithName(command.getName())) {
+            throw new NameAlreadyExistsException("Employee exists with name: %s".formatted(command.getName()));
+        }
         Employee employee = new Employee();
         employee.setName(command.getName());
         employee.setSalary(command.getSalary());
@@ -50,9 +53,10 @@ public class EmployeeService {
         return List.of(100_000, 200_000, 500_000);
     }
 
-    public int countEmployeesWithName(String name) {
-        return
+    private boolean isEmployeeWithName(String name) {
+        int count =
                 employeeRepository.countEmployeesWithName(name);
+        return count > 0;
     }
 
     private static Supplier<IllegalArgumentException> illegalArgumentException(long id) {

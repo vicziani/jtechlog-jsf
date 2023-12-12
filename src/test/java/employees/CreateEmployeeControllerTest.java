@@ -31,11 +31,10 @@ public class CreateEmployeeControllerTest {
 
     @Test
     void testCreateEmployeeWhenEmployeeExists() {
-        when(employeeService.countEmployeesWithName(anyString())).thenReturn(1);
+        doThrow(new NameAlreadyExistsException("Name already exists")).when(employeeService).createEmployee(any());
         createEmployeeController.setCommand(new CreateEmployeeCommand("John Doe", 100_000));
         createEmployeeController.createEmployee();
 
         verify(messageContext).addMessage("name_already_exists");
-        verify(employeeService, never()).createEmployee(any(CreateEmployeeCommand.class));
     }
 }

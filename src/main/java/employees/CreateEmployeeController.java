@@ -32,14 +32,15 @@ public class CreateEmployeeController {
     }
 
     public String createEmployee() {
-        int count = employeeService.countEmployeesWithName(command.getName());
-        if (count > 0) {
+        try {
+            employeeService.createEmployee(command);
+            messageContext.addFlashMessage("employee_has_been_created", command.getName());
+            return "index.xhtml?faces-redirect=true";
+        }
+        catch (NameAlreadyExistsException e) {
             messageContext.addMessage("name_already_exists");
             return null;
         }
-        employeeService.createEmployee(command);
-        messageContext.addFlashMessage("employee_has_been_created", command.getName());
-        return "index.xhtml?faces-redirect=true";
     }
 
 }
