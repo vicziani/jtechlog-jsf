@@ -17,7 +17,7 @@
 
     <h:messages styleClass="alert alert-danger" globalOnly="true" />
 
-    <h:form>
+    <h:form id="create-employee-form">
 
     <div class="form-group">
         <label for="name">Name</label>
@@ -39,7 +39,7 @@
         </h:selectOneMenu>
     </div>
 
-    <h:commandButton value="Create employee"
+    <h:commandButton id="create-button" value="Create employee"
         action="#{createEmployeeController.createEmployee()}" styleClass="btn btn-primary"/>
         <h:outputText value=" " />
 
