@@ -7,5 +7,23 @@ felülettel. A letöltést követően Mavennel, az 'mvn package' paranccsal buil
 és a létrejött jar állomány azonnal futtatható. Fejlesztőeszközben a `EmployeesAppApplication`
 osztály futtatásával indítható.
 
+Docker image-be csomagolható a következő paranccsal:
+
+```shell
+mvn spring-boot:build-image
+```
+
+Ezután indítható a következő paranccsal:
+
+```shell
+docker run -d -p 8080:8080 --name employees-app employees-app:0.0.1-SNAPSHOT
+```
+
+Saját `Dockerfile` használata esetén a csomagolás:
+
+```shell
+docker build -t employees-app:0.0.1-SNAPSHOT .
+```
+
 viczian.istvan a gmail-en
 
